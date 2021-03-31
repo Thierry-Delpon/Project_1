@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<p> Détail de l'idée {{ wish.id }}</p>
+<ul>
+    <li>Titre: {{ wish.title }} = [{{ wish.category.name }}]</li>
+    <li>Descripiton: {{ wish.description }}</li>
+    <li>Auteur: {{ wish.author | capitalize }}</li>
+    <li>Date: {{ wish.dateCreated | date("d/m/Y H:i:s")}}</li>
+</ul>
+{% endblock %}
+
+{% block title %} Souhait en détail {% endblock %}

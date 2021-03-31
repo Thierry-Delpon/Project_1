@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Quel est ton souhait ?</h2>
+
+    {{ form_start(wishForm, {attr: {novalidate : 'novalidate'}}) }}
+    {{ form_widget(wishForm) }}
+    <button> C'est parti !</button>
+    {{ form_end(wishForm) }}
+
+{% endblock %}
+
+{% block title %} Ajouter ton souhait | {{ parent() }} {% endblock %}
