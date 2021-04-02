@@ -17,11 +17,21 @@
 {# en-tête du site #}
 <header>
     <div class="container">
+        <div class="header_top">
         <h1 class="header-logo">
             <a href="{{ url('home_index') }}" title="Page Principale">
                 <img src="{{ asset('logo.svg') }}" alt="Bucket-List Logo" height="100px">Bucket-List
             </a>
         </h1>
+            <nav class="user-nav">
+                {% if app.user %}
+                    <a href="{{ path('app_logout') }}" title="Lougout">Lougout ({{ app.user.username }})</a>
+                {% else %}
+                    <a href="{{ path('app_register') }}" title="Create your account">Register</a>
+                    <a href="{{ path('app_login') }}" title="Login">Login</a>
+                {% endif %}
+            </nav>
+        </div>
         <nav>
             <a href="{{ path('home_contact') }}" title="Page Principale">Contact</a>
             <a href="{{ path('wish_list') }}" title="Page Wish">Wish List</a>

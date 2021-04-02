@@ -3,8 +3,8 @@
 {% block body %}
 <p> Détail de l'idée {{ wish.id }}</p>
 <ul>
-    <li>Titre: {{ wish.title }} = [{{ wish.category.name }}]</li>
-    <li>Descripiton: {{ wish.description }}</li>
+    <li>[{{ wish.category.name }}] {{ wish.title }}  </li>
+    <li>Descripiton: {{ wish.description | raw }}</li>
     <li>Auteur: {{ wish.author | capitalize }}</li>
     <li>Date: {{ wish.dateCreated | date("d/m/Y H:i:s")}}</li>
 </ul>

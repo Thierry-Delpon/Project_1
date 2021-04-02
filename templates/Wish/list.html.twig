@@ -8,7 +8,7 @@
 
 
     {% for wish in wishes %}
-        <li><a href="{{ url('wish_detail',{"id": wish.id}) }}">{{ wish.title }} = [{{ wish.category.name }}]</a><br></li>
+        <li><a href="{{ url('wish_detail',{"id": wish.id}) }}">{{ wish.title }}  [{{ wish.category.name }}]</a><br></li>
     {% endfor %}
 </ul>
 {% endblock %}

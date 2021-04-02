@@ -7,9 +7,12 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\FormType;
 use App\Repository\WishRepository;
+use App\Services\Censurator;
+use App\Services\TextUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -69,10 +72,11 @@ class WishController extends AbstractController
     /**
      * @Route (path="create", name="create", methods={"GET","POST"})
      */
-     public function create(Request $request, EntityManagerInterface $entityManager){
+     public function create(Request $request, EntityManagerInterface $entityManager, TextUtils $textUtils, Censurator $censurator) :Response{
 
          //commencer avec une entité vide
          $wish = new Wish();
+         $wish->setAuthor($this->getUser()->getUsername());
 
          // on fait notre formulaire lié à notre entité vide
          $wishForm = $this->createForm(FormType::class, $wish);
@@ -82,7 +86,9 @@ class WishController extends AbstractController
 
          // si le formulaire est soumis et valide
          if ($wishForm->isSubmitted() && $wishForm->isValid()) {
-
+             $purifiedDescription = $censurator->purify($wish->getDescription());
+             $wish->setDescription($purifiedDescription);
+             $wish->setDescription($textUtils->returnLineAfterDot($wish->getDescription()));
              $wish->setIsPublished(true);
              $wish->setDateCreated(new \DateTime());
 
